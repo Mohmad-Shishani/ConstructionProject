@@ -27,6 +27,7 @@ namespace M.CP.Api.Controllers
         #endregion
 
         #region Services
+
         [HttpGet]
         public async Task<List<WorkerDto>> GetWorkers()
         {

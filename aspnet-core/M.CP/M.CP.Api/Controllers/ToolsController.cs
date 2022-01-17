@@ -68,7 +68,7 @@ namespace M.CP.Api.Controllers
         public async Task EditTool(int id, [FromBody] ToolDto toolDto)
         {
             var tool = await _context.Tools.FindAsync(id);
-            _mapper.Map<ToolDto>(tool);
+            _mapper.Map(toolDto, tool);
 
             _context.Update(tool);
             await _context.SaveChangesAsync();

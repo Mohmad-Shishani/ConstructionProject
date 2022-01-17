@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M.CP.Api.Data;
 using M.CP.Entities;
-using AutoMapper;
 using M.CP.Dtos.Projects;
+using AutoMapper;
 
 namespace M.CP.Api.Controllers
 {
@@ -26,7 +26,7 @@ namespace M.CP.Api.Controllers
         }
         #endregion
 
-        #region Srvices
+        #region Services
 
         [HttpGet]
         public async Task<List<ProjectDto>> GetProjects()
@@ -37,8 +37,9 @@ namespace M.CP.Api.Controllers
                                  .Include(p => p.Companies)
                                  .ToListAsync();
 
-            var projectDtos = _mapper.Map<List<Project>, List< ProjectDto>>(projects);
-            return projectDtos;         
+            var projectDtos = _mapper.Map<List<ProjectDto>>(projects);
+
+            return projectDtos;
         }
 
 
@@ -50,6 +51,7 @@ namespace M.CP.Api.Controllers
                                 .Projects
                                 .Include(p => p.Workers)
                                 .Include(p => p.Companies)
+                                .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
             var projectDto = _mapper.Map<ProjectDto>(project);
@@ -63,7 +65,7 @@ namespace M.CP.Api.Controllers
         public async Task CreateProject([FromBody] ProjectDto projectDto)
         {
             var project = _mapper.Map<Project>(projectDto);
-            await _context.Projects.AddAsync(project);
+            await _context.AddAsync(project);
             await _context.SaveChangesAsync();
 
         }
@@ -71,7 +73,7 @@ namespace M.CP.Api.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task EditProject(int id,[FromBody] ProjectDto projectDto)
+        public async Task EditProject(int id, [FromBody] ProjectDto projectDto)
         {
             var project = await _context
                                 .Projects
@@ -80,8 +82,8 @@ namespace M.CP.Api.Controllers
                                 .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
-            _mapper.Map<Project>(project);
-             _context.Projects.Update(project);
+            _mapper.Map(projectDto, project);
+            _context.Update(project);
             await _context.SaveChangesAsync();
         }
 
