@@ -24,6 +24,7 @@ namespace M.CP.Api.Controllers
             _context = context;
             _mapper = mapper;
         }
+
         #endregion
 
         #region Services
@@ -41,6 +42,8 @@ namespace M.CP.Api.Controllers
 
             return workerDtos;
         }
+
+
 
         [HttpGet("{id}")]
         public async Task<WorkerDto> GetWorkerById(int id)
@@ -79,7 +82,6 @@ namespace M.CP.Api.Controllers
                                 .Include(w => w.Projects)
                                 .Where(w => w.Id == id)
                                 .SingleOrDefaultAsync();
-            //var worker = await _context.Workers.FindAsync(id);
 
             _mapper.Map(workerDto, worker);
             _context.Update(worker);
@@ -96,6 +98,7 @@ namespace M.CP.Api.Controllers
             _context.Remove(worker);
             await _context.SaveChangesAsync();
         }
+
         #endregion
     }
 }

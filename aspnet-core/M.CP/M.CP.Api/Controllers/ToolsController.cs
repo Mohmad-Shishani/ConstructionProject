@@ -57,7 +57,7 @@ namespace M.CP.Api.Controllers
         public async Task CreateTool([FromBody] ToolDto toolDto)
         {
             var tool = _mapper.Map<Tool>(toolDto);
-            await _context.Tools.AddAsync(tool);
+            await _context.AddAsync(tool);
             await _context.SaveChangesAsync();
 
         }
@@ -68,8 +68,8 @@ namespace M.CP.Api.Controllers
         public async Task EditTool(int id, [FromBody] ToolDto toolDto)
         {
             var tool = await _context.Tools.FindAsync(id);
-            _mapper.Map(toolDto, tool);
 
+            _mapper.Map(toolDto, tool);
             _context.Update(tool);
             await _context.SaveChangesAsync();
         }
@@ -81,8 +81,7 @@ namespace M.CP.Api.Controllers
         public async Task DeleteTool(int id)
         {
             var tool = await _context.Tools.FindAsync(id);
-
-            _context.Tools.Remove(tool);
+            _context.Remove(tool);
             await _context.SaveChangesAsync();
         }
 

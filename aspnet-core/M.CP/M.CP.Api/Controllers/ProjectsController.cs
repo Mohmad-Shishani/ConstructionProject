@@ -24,6 +24,7 @@ namespace M.CP.Api.Controllers
             _context = context;
             _mapper = mapper;
         }
+
         #endregion
 
         #region Services
@@ -106,6 +107,7 @@ namespace M.CP.Api.Controllers
         {
             return _context.Projects.Any(e => e.Id == id);
         }
+
         #endregion
     }
 }

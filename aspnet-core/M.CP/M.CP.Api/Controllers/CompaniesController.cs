@@ -24,6 +24,7 @@ namespace M.CP.Api.Controllers
             _context = context;
             _mapper = mapper;
         }
+
         #endregion
 
         #region Services
@@ -38,11 +39,15 @@ namespace M.CP.Api.Controllers
             return companyDtos;
         }
 
+
+
         [HttpGet("{id}")]
         public async Task<CompanyDto> GetCompanyById(int id)
         {
             var company = await _context.Companies.FindAsync(id);
+
             var companyDto = _mapper.Map<CompanyDto>(company);
+
             return companyDto;
         }
 
@@ -53,9 +58,7 @@ namespace M.CP.Api.Controllers
         {
             var company = _mapper.Map<Company>(companyDto);
             await _context.AddAsync(company);
-
             await _context.SaveChangesAsync();
-
         }
 
 
@@ -64,7 +67,6 @@ namespace M.CP.Api.Controllers
         public async Task EditCompany(int id, [FromBody] CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
-
             _context.Update(company);
             await _context.SaveChangesAsync();
         }
@@ -78,6 +80,7 @@ namespace M.CP.Api.Controllers
             _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
         }
+
         #endregion
 
         #region Private Methode
@@ -85,6 +88,7 @@ namespace M.CP.Api.Controllers
         {
             return _context.Companies.Any(e => e.Id == id);
         }
+
         #endregion
     }
 }
