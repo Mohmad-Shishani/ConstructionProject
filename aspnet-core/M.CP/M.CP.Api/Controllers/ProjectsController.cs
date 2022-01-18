@@ -10,7 +10,7 @@ using AutoMapper;
 
 namespace M.CP.Api.Controllers
 {
-    [Route("api/[controller][action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProjectsController : ControllerBase
     {

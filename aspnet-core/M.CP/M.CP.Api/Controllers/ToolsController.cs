@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using M.CP.Api.Data;
 using M.CP.Entities;
-using AutoMapper;
 using M.CP.Dtos.Tools;
+using AutoMapper;
 
 namespace M.CP.Api.Controllers
 {
-    [Route("api/[controller][action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ToolsController : ControllerBase
     {
