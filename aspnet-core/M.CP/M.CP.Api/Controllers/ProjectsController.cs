@@ -35,7 +35,6 @@ namespace M.CP.Api.Controllers
             var projects = await _context
                                  .Projects
                                  .Include(p => p.Workers)
-                                 .Include(p => p.Companies)
                                  .ToListAsync();
 
             var projectDtos = _mapper.Map<List<ProjectDto>>(projects);
@@ -51,7 +50,6 @@ namespace M.CP.Api.Controllers
             var project = await _context
                                 .Projects
                                 .Include(p => p.Workers)
-                                .Include(p => p.Companies)
                                 .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
@@ -79,7 +77,6 @@ namespace M.CP.Api.Controllers
             var project = await _context
                                 .Projects
                                 .Include(p => p.Workers)
-                                .Include(p => p.Companies)
                                 .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
