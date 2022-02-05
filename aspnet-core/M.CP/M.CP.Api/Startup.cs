@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 
 namespace M.CP.Api
 {
@@ -20,6 +21,17 @@ namespace M.CP.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: "AllowOrigin",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -27,8 +39,9 @@ namespace M.CP.Api
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                }
-                );
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
+            
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
@@ -42,6 +55,8 @@ namespace M.CP.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("AllowOrigin");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
