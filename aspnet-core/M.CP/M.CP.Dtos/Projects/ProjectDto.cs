@@ -10,7 +10,6 @@ namespace M.CP.Dtos.Projects
         public ProjectDto()
         {
             Workers = new List<WorkerDto>();
-            Companies = new List<CompanyDto>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,6 +17,7 @@ namespace M.CP.Dtos.Projects
         public DateTime ProjectEnd { get; set; }
         public int Income { get; set; }
         public List<WorkerDto> Workers { get; set; }
-        public List<CompanyDto> Companies { get; set; }
+        public int? CompanyId { get; set; }
+        public CompanyDto Company { get; set; }
     }
 }
