@@ -1,1 +1,31 @@
-<p>worker works!</p>
+ <div class="container">
+ <table class="table  text-secondary">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Shift</th>
+                <th>Payment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let worker of workers">
+                <td>{{worker.name}}</td>
+                <td>{{worker.dateOfBirth | date: 'yyyy'}}</td>
+                <td>{{worker.gender}}</td>
+                <td>{{worker.shift}}</td>
+                <td>{{worker.payment}}</td>
+
+                <td>
+                    <a href="/worker/{{worker.id}}">
+                        <mat-icon>info</mat-icon>
+                    </a>
+                    <mat-icon>edit</mat-icon>
+                    <mat-icon>delete</mat-icon>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

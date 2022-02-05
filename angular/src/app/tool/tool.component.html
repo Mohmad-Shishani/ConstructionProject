@@ -1,0 +1,23 @@
+<div class="container">
+    <table class="table  text-secondary">
+           <thead>
+               <tr>
+                   <th>Name</th>
+                   <th>Actions</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor="let tool of tools">
+                   <td>{{tool.name}}</td>
+                   <td>
+                       <a href="/tool/{{tool.id}}">
+                           <mat-icon>info</mat-icon>
+                       </a>
+                       <mat-icon>edit</mat-icon>
+                       <mat-icon>delete</mat-icon>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+   

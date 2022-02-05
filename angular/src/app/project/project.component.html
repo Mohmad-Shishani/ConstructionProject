@@ -1,0 +1,30 @@
+<div class="container">
+    <table class="table  text-secondary">
+           <thead>
+               <tr>
+                   <th>Name</th>
+                   <th>Project Start</th>
+                   <th>Project End</th>
+                   <th>Income</th>
+                   <th>Actions</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr *ngFor="let project of projects">
+                   <td>{{project.name}}</td>
+                   <td>{{project.projectStart | date: 'yyyy'}}</td>
+                   <td>{{project.projectEnd}}</td>
+                   <td>{{project.income}}</td>
+   
+                   <td>
+                       <a href="/project/{{project.id}}">
+                           <mat-icon>info</mat-icon>
+                       </a>
+                       <mat-icon>edit</mat-icon>
+                       <mat-icon>delete</mat-icon>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+   
