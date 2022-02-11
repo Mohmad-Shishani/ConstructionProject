@@ -1,1 +1,57 @@
-<h2>{{project?.name}</h2>
+<div class="container my-4">
+    <h1 class="page-title">Project Details</h1>
+    <hr>
+
+    <div class="row">
+    <div class="col-md-12">
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Name</div>
+            <div class="col-md-10">{{project?.name}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Project Start Date</div>
+            <div class="col-md-10">{{project?.projectStart | date: 'yyyy,mm,dd'}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Project End Date</div>
+            <div class="col-md-10">{{project?.projectEnd | date: 'yyyy,mm,dd'}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Income</div>
+            <div class="col-md-10">{{ project?.income }}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4 font-weight-bold">Company</div>
+            <div class="col-md-8">{{ project?.company?.name }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+<div class="col md 6">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Worker/s</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let worker of project.workers">
+            <td>{{ worker.name }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+    <hr>
+    <button mat-raised-button [routerLink]="['/projects']">Back to Projects</button>
+
+</div>

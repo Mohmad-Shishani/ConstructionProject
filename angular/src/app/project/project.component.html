@@ -1,5 +1,11 @@
 <div class="container">
-    <table class="table  text-secondary">
+
+    <h1 class="page-title">Projects</h1>
+    <hr>
+
+    <button mat-raised-button class="btn-theme mb-3" [routerLink]="['/projects/add']">Create New</button>
+
+    <table class="table text-secondary">
            <thead>
                <tr>
                    <th>Name</th>
@@ -17,11 +23,15 @@
                    <td>{{project.income}}</td>
    
                    <td>
-                       <a href="/project/{{project.id}}">
-                           <mat-icon>info</mat-icon>
+                    <a matTooltip="Worker Details" [routerLink]="['/projects/', project.id]">
+                        <mat-icon class="info">info</mat-icon>
+                    </a>
+                    <a matTooltip="Edit Worker" [routerLink]="['/projects/edit', project.id]">
+                        <mat-icon class="edit">edit</mat-icon>
                        </a>
-                       <mat-icon>edit</mat-icon>
-                       <mat-icon>delete</mat-icon>
+                       <a matTooltip="Delete Worker" (click)="deleteProject(project.id)">
+                        <mat-icon class="delete">delete</mat-icon>
+                       </a>
                    </td>
                </tr>
            </tbody>

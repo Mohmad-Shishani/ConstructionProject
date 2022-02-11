@@ -1,1 +1,94 @@
-<p>project-add-edit works!</p>
+<div class="container my-4">
+    <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+
+      <h1 *ngIf="pageMode == pageModeEnum.Add">Add a Project</h1>
+      <h1 *ngIf="pageMode == pageModeEnum.Edit">Edit the Project</h1>
+          <hr>
+          
+          <div class="row">
+                <div class="col md 6">
+
+                      <div>
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Name" formControlName="name"/>
+                                   <mat-error>
+                                         Please provide name.
+                                   </mat-error>
+                            </mat-form-field>
+                      </div>
+                
+                      <div>
+                            <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Project Start</mat-label>
+                                  <input matInput [matDatepicker]="picker"  formControlName="projectStart">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                  <mat-error>
+                                        The Project Start Date is required.
+                                  </mat-error>
+                            </mat-form-field>
+                      </div>
+                
+                        <div>
+                        <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Project End</mat-label>
+                              <input matInput [matDatepicker]="picker2"  formControlName="projectEnd">
+                              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                              <mat-datepicker #picker2></mat-datepicker>
+                              <mat-error>
+                                    The Project End Date is required.
+                              </mat-error>
+                        </mat-form-field>
+                        </div>
+
+                  <div>
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Income</mat-label>
+                        <input matInput placeholder="$1000,0" formControlName="income"/>
+                           <mat-error>
+                                 Please provide Income.
+                           </mat-error>
+                    </mat-form-field>
+              </div>
+        
+                </div>
+
+                <div class="col md 6">
+
+                  <div>
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label>Company</mat-label>
+                            <mat-select formControlName="companyId">
+                                <mat-option *ngFor="let company of companiesList" [value]="company.id">
+                                    {{ company.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                  <div>
+                        <mat-form-field appearance="fill" class="w-100">
+                              <mat-label>Workers</mat-label>
+                              <mat-select formControlName="workers" multiple [compareWith]="compareWorkers">
+                                    <mat-option *ngFor="let worker of workersList" [value]="worker">
+                                          {{worker.name}}
+                                    </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                  </div>
+                      
+                </div>
+          </div>
+
+            <div>
+                   <button class="mr-2 btn-theme" type="submit" mat-raised-button>
+                    <span *ngIf="pageMode == pageModeEnum.Add">Add</span>
+                    <span *ngIf="pageMode == pageModeEnum.Edit">Save</span>
+                </button>
+                <button mat-raised-button [routerLink]="['/projects']">Cancel</button>
+            </div>
+
+            </form>
+</div>
+
