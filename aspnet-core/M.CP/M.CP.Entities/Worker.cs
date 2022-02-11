@@ -17,6 +17,7 @@ namespace M.CP.Entities
         public Gender Gender { get; set; }
         public Shift Shift { get; set; }
         public bool Payment { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
         public List<Tool> Tools { get; set; }
         public List<Project> Projects { get; set; }

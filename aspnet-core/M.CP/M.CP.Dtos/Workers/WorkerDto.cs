@@ -19,6 +19,7 @@ namespace M.CP.Dtos.Workers
         public Gender Gender { get; set; }
         public Shift Shift { get; set; }
         public bool Payment { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
         public List<ToolDto> Tools { get; set; }
         public List<ProjectDto> Projects { get; set; }

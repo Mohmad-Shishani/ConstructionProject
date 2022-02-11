@@ -64,6 +64,10 @@ namespace M.CP.Api.Controllers
         public async Task CreateProject([FromBody] ProjectDto projectDto)
         {
             var project = _mapper.Map<Project>(projectDto);
+
+            await UpdateProjectWorkers(projectDto, project);
+
+
             await _context.AddAsync(project);
             await _context.SaveChangesAsync();
 
@@ -81,6 +85,10 @@ namespace M.CP.Api.Controllers
                                 .SingleOrDefaultAsync();
 
             _mapper.Map(projectDto, project);
+
+            await UpdateProjectWorkers(projectDto, project);
+
+
             _context.Update(project);
             await _context.SaveChangesAsync();
         }
@@ -100,10 +108,33 @@ namespace M.CP.Api.Controllers
         #endregion
 
         #region Privte Methode
-        private bool ProjectExists(int id)
+        private async Task UpdateProjectWorkers(ProjectDto projectDto, Project project)
         {
-            return _context.Projects.Any(e => e.Id == id);
+            var workerIds = GetWorkersIdsFromDto(projectDto);
+
+            var workers = await _context.Workers.Where(p => workerIds.Contains(p.Id)).ToListAsync();
+
+            //var projects = await _context
+            //            .Projects
+            //            .Where(p => projectIds.Contains(p.Id))
+            //            .ToListAsync();
+
+            project.Workers.Clear();
+            project.Workers.AddRange(workers);
         }
+
+        private List<int> GetWorkersIdsFromDto(ProjectDto projectDto)
+        {
+            var workersIds = new List<int>();
+
+            foreach (var worker in projectDto.Workers)
+            {
+                workersIds.Add(worker.Id);
+            }
+
+            return workersIds;
+        }
+
 
         #endregion
     }
