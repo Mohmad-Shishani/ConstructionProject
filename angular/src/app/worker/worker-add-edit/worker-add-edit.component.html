@@ -1,0 +1,124 @@
+<div class="container my-4">
+      <form [formGroup]="workerForm" (ngSubmit)="submitForm()">
+
+            <h1 *ngIf="pageMode == pageModeEnum.Add">Add a Worker</h1>
+            <h1 *ngIf="pageMode == pageModeEnum.Edit">Edit the Worker</h1>            <hr>
+            
+            <div class="row">
+                  <div class="col md 6">
+
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                  <mat-label>Name</mat-label>
+                                  <input matInput placeholder="Name" formControlName="name" />
+                                     <mat-error>
+                                           Please provide name.
+                                     </mat-error>
+                              </mat-form-field>
+                        </div>
+                  
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                              <mat-label>Date of Birth</mat-label>
+                                    <input matInput [matDatepicker]="picker"  formControlName="dateOfBirth">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error>
+                                          The Date of Birth is required.
+                                    </mat-error>
+                              </mat-form-field>
+                        </div>
+                  
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Gender</mat-label>
+                                          <mat-select formControlName="gender">
+                                          <mat-option value="Male">Male</mat-option>
+                                    <mat-option value="MAN">MAN</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                          Gender is required.
+                              </mat-error>
+                              </mat-form-field>
+                        </div>
+
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Shift</mat-label>
+                                    <mat-select formControlName="shift">
+                                          <mat-option value="DayShift">DayShift</mat-option>
+                                          <mat-option value="NightShift">NightShift</mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                          Shift time is required.
+                                    </mat-error>
+                              </mat-form-field>
+                        </div>
+
+                  </div>
+
+                  <div class="col md 6">
+
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Tools</mat-label>
+                                    <mat-select formControlName="tools" multiple [compareWith]="compareTools">
+                                          <mat-option *ngFor="let tool of toolsList" [value]="tool">
+                                                {{tool.name}}
+                                          </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                          Shift time is required.
+                                    </mat-error>
+                              </mat-form-field>
+                        </div>
+
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Projects</mat-label>
+                                    <mat-select formControlName="projects" multiple [compareWith]="compareProjects">
+                                          <mat-option *ngFor="let project of projectsList" [value]="project">
+                                                {{project.name}}
+                                          </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                          Shift time is required.
+                                    </mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div>
+                              <mat-form-field appearance="fill" class="w-100">
+                                    <mat-label>Leave a comment</mat-label>
+                                    <textarea cols="5" rows="1"  matInput placeholder="Any Additional Info About the Worker.."></textarea>
+                                  </mat-form-field>
+                        </div>
+
+                        <!-- <textarea appearance="fill" class="w-100" required="required" placeholder="tell us what you think.." name="feedback" cols="50" rows="10" spellcheck="false" style="height: 52.6px;"></textarea> -->
+
+                        <div>
+                              <mat-radio-group
+                                class="mt-3"
+                                formControlName="payment"
+                                aria-label="Select an option"
+                              >
+                                <mat-radio-button value="true"> Paid</mat-radio-button>
+                                <mat-radio-button class="pl-3" value="false" [checked]="true">
+                                  Not Paid
+                                </mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                        
+                  </div>
+            </div>
+
+            <div>
+                  <button class="mr-2 btn-theme" type="submit" mat-raised-button>
+                      <span *ngIf="pageMode == pageModeEnum.Add">Add</span>
+                      <span *ngIf="pageMode == pageModeEnum.Edit">Save</span>
+                  </button>
+                  <button mat-raised-button [routerLink]="['/workers']">Cancel</button>
+              </div>
+
+              </form>
+</div>
+

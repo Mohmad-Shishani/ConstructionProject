@@ -1,5 +1,10 @@
  <div class="container">
- <table class="table  text-secondary">
+    <h1 class="page-title">Workers</h1>
+    <hr>
+
+    <button mat-raised-button class="btn-theme mb-3" [routerLink]="['/workers/add']">Create New</button>
+
+ <table class="table text-secondary">
         <thead>
             <tr>
                 <th>Name</th>
@@ -16,14 +21,25 @@
                 <td>{{worker.dateOfBirth | date: 'yyyy'}}</td>
                 <td>{{worker.gender}}</td>
                 <td>{{worker.shift}}</td>
-                <td>{{worker.payment}}</td>
+                <td>
+                    <span *ngIf="worker.payment" matTooltip="Paid On: {{worker.paymentDate | date: 'short'}}">
+                        <mat-icon class="text-success">check_circle</mat-icon>
+                    </span>
+                    <span *ngIf="worker.payment == false">
+                        <mat-icon class="text-danger">cancel</mat-icon>
+                    </span>
+                </td>
 
                 <td>
-                    <a href="/worker/{{worker.id}}">
-                        <mat-icon>info</mat-icon>
+                    <a matTooltip="Worker Details" [routerLink]="['/workers/', worker.id]">
+                        <mat-icon class="info">info</mat-icon>
                     </a>
-                    <mat-icon>edit</mat-icon>
-                    <mat-icon>delete</mat-icon>
+                    <a matTooltip="Edit Worker" [routerLink]="['/workers/edit', worker.id]">
+                        <mat-icon class="edit">edit</mat-icon>
+                       </a>
+                       <a matTooltip="Delete Worker" (click)="deleteWorker(worker.id)">
+                        <mat-icon class="delete">delete</mat-icon>
+                       </a>
                 </td>
             </tr>
         </tbody>

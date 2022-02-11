@@ -1,1 +1,77 @@
-<h2>{{worker?.name}} {{worker?.gender}}</h2>
+<div class="container my-4">
+    <h1 class="page-title">Worker Details</h1>
+    <hr>
+
+    <div class="row">
+    <div class="col-md-12">
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Name</div>
+            <div class="col-md-10">{{worker?.name}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Date of Birth</div>
+            <div class="col-md-10">{{worker?.dateOfBirth | date: 'yyyy,mm,dd'}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Gender</div>
+            <div class="col-md-10">{{worker?.gender}}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Shift</div>
+            <div class="col-md-10">{{ worker?.shift }}
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Payment</div>
+            <div class="col-md-10">{{ worker?.payment }}</div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Payment Date</div>
+            <div class="col-md-10">{{ worker?.paymentDate | date: 'short' }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+<div class="col md 6">
+<table class="table">
+<thead>
+    <tr>
+        <th>Tool/s</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let tool of worker.tools">
+        <td>{{ tool.name }}</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<div class="col md 6">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Project/s</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let project of worker.projects">
+            <td>{{ project.name }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
+
+    <hr>
+    <button mat-raised-button [routerLink]="['/workers']">Back to Workers</button>
+
+</div>
