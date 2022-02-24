@@ -32,19 +32,22 @@ namespace M.CP.Api.Controllers
         [HttpGet]
         public async Task<List<ToolDto>> GetTools()
         {
-            var tools = await _context.Tools.ToListAsync();
-
+            var tools = await _context.Tools
+                        .Include(t => t.Worker).ToListAsync();
             var toolDtos = _mapper.Map<List<ToolDto>>(tools);
 
             return toolDtos;
         }
 
 
-
         [HttpGet("{id}")]
-        public async Task<ToolDto> GetTool(int id)
+        public async Task<ToolDto> GetToolById(int id)
         {
-            var tool = await _context.Tools.FindAsync(id);
+            var tool = await _context
+                        .Tools
+                        .Include(t => t.Worker)
+                        .Where(t => t.Id == id)
+                        .SingleOrDefaultAsync();
 
             var toolDto = _mapper.Map<ToolDto>(tool);
 
@@ -67,9 +70,20 @@ namespace M.CP.Api.Controllers
         [HttpPut("{id}")]
         public async Task EditTool(int id, [FromBody] ToolDto toolDto)
         {
-            var tool = await _context.Tools.FindAsync(id);
+            var tool = await _context
+                            .Tools
+                            .Include(t => t.Worker)
+                            .Where(t => t.Id == id)
+                            .SingleOrDefaultAsync();
 
             _mapper.Map(toolDto, tool);
+
+            if (toolDto.WorkerId.HasValue)
+            {
+                var worker = await _context.Workers.FindAsync(toolDto.WorkerId);
+                tool.Worker = worker;
+            }
+
             _context.Update(tool);
             await _context.SaveChangesAsync();
         }

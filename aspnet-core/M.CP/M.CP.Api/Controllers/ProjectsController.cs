@@ -50,6 +50,7 @@ namespace M.CP.Api.Controllers
             var project = await _context
                                 .Projects
                                 .Include(p => p.Workers)
+                                .Include(p => p.Company)
                                 .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
@@ -64,9 +65,10 @@ namespace M.CP.Api.Controllers
         public async Task CreateProject([FromBody] ProjectDto projectDto)
         {
             var project = _mapper.Map<Project>(projectDto);
-
-            await UpdateProjectWorkers(projectDto, project);
-
+            if (projectDto.Workers != null)
+            {
+                await UpdateProjectWorkers(projectDto, project);
+            }
 
             await _context.AddAsync(project);
             await _context.SaveChangesAsync();
@@ -81,6 +83,7 @@ namespace M.CP.Api.Controllers
             var project = await _context
                                 .Projects
                                 .Include(p => p.Workers)
+                                .Include(p => p.Company)
                                 .Where(p => p.Id == id)
                                 .SingleOrDefaultAsync();
 
@@ -88,6 +91,11 @@ namespace M.CP.Api.Controllers
 
             await UpdateProjectWorkers(projectDto, project);
 
+            if (projectDto.CompanyId.HasValue)
+            {
+                var company = await _context.Companies.FindAsync(projectDto.CompanyId);
+                project.Company = company;
+            }
 
             _context.Update(project);
             await _context.SaveChangesAsync();
@@ -108,16 +116,17 @@ namespace M.CP.Api.Controllers
         #endregion
 
         #region Privte Methode
+
+
+
         private async Task UpdateProjectWorkers(ProjectDto projectDto, Project project)
         {
             var workerIds = GetWorkersIdsFromDto(projectDto);
 
-            var workers = await _context.Workers.Where(p => workerIds.Contains(p.Id)).ToListAsync();
-
-            //var projects = await _context
-            //            .Projects
-            //            .Where(p => projectIds.Contains(p.Id))
-            //            .ToListAsync();
+            var workers = await _context
+                                    .Workers
+                                    .Where(w => workerIds.Contains(w.Id))
+                                    .ToListAsync();
 
             project.Workers.Clear();
             project.Workers.AddRange(workers);

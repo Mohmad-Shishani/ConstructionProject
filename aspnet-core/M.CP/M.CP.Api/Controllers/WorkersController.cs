@@ -68,12 +68,10 @@ namespace M.CP.Api.Controllers
         public async Task CreateWorker([FromBody] WorkerDto workerDto)
         {
             var worker = _mapper.Map<Worker>(workerDto);
-
-            await UpdateWorkerProjects(workerDto, worker);
-            await UpdateWorkerTools(workerDto, worker);
-
-            worker.PaymentDate = DateTime.Now;
-
+            if (workerDto.Projects != null)
+            {
+                await UpdateWorkerProjects(workerDto, worker);
+            }
             await _context.AddAsync(worker);
             await _context.SaveChangesAsync();
         }
@@ -92,14 +90,18 @@ namespace M.CP.Api.Controllers
 
             _mapper.Map(workerDto, worker);
 
-            await UpdateWorkerProjects(workerDto,worker);
-            await UpdateWorkerTools(workerDto,worker);
+            await UpdateWorkerProjects(workerDto, worker);
 
-
+            if (worker.Payment == false)
+            {
+                worker.PaymentDate = null;
+            }
             _context.Update(worker);
             await _context.SaveChangesAsync();
 
         }
+
+
 
         [HttpPost("{id}")]
         public async Task PayWorker(int id)
@@ -111,6 +113,8 @@ namespace M.CP.Api.Controllers
             _context.Update(worker);
             await _context.SaveChangesAsync();
         }
+
+
 
         [HttpDelete("{id}")]
         public async Task DeleteWorker(int id)
@@ -126,16 +130,18 @@ namespace M.CP.Api.Controllers
 
         #region Private Methods
 
+
+
+
         private async Task UpdateWorkerProjects(WorkerDto workerDto, Worker worker)
         {
             var projectIds = GetProjectsIdsFromDto(workerDto);
 
-            var projects = await _context.Projects.Where(p => projectIds.Contains(p.Id)).ToListAsync();
 
-            //var projects = await _context
-            //            .Projects
-            //            .Where(p => projectIds.Contains(p.Id))
-            //            .ToListAsync();
+            var projects = await _context
+                                    .Projects
+                                    .Where(p => projectIds.Contains(p.Id))
+                                    .ToListAsync();
 
             worker.Projects.Clear();
             worker.Projects.AddRange(projects);
@@ -145,9 +151,9 @@ namespace M.CP.Api.Controllers
         {
             var projectsIds = new List<int>();
 
-            foreach (var project in workerDto.Projects)
+            foreach (var pro in workerDto.Projects)
             {
-                projectsIds.Add(project.Id);
+                projectsIds.Add(pro.Id);
             }
 
             return projectsIds;
@@ -155,27 +161,7 @@ namespace M.CP.Api.Controllers
 
 
 
-        private async Task UpdateWorkerTools(WorkerDto workerDto, Worker worker)
-        {
-            var toolIds = GetToolsIdsFromDto(workerDto);
 
-            var tools = await _context.Tools.Where(p => toolIds.Contains(p.Id)).ToListAsync();
-
-
-            worker.Tools.Clear();
-            worker.Tools.AddRange(tools);
-        }
-        private List<int> GetToolsIdsFromDto(WorkerDto workerDto)
-        {
-            var toolsIds = new List<int>();
-
-            foreach (var project in workerDto.Tools)
-            {
-                toolsIds.Add(project.Id);
-            }
-
-            return toolsIds;
-        }
 
         #endregion
     }

@@ -32,7 +32,10 @@ namespace M.CP.Api.Controllers
         [HttpGet]
         public async Task<List<CompanyDto>> GetCompanies()
         {
-            var companies = await _context.Companies.ToListAsync();
+            var companies = await _context
+                                  .Companies
+                                  .Include(c => c.Projects)
+                                  .ToListAsync();
 
             var companyDtos = _mapper.Map<List<CompanyDto>>(companies);
 
@@ -44,7 +47,11 @@ namespace M.CP.Api.Controllers
         [HttpGet("{id}")]
         public async Task<CompanyDto> GetCompanyById(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company = await _context
+                                .Companies
+                                .Include(c => c.Projects)
+                                .Where(c => c.Id == id)
+                                .SingleOrDefaultAsync();
 
             var companyDto = _mapper.Map<CompanyDto>(company);
 
@@ -57,6 +64,11 @@ namespace M.CP.Api.Controllers
         public async Task CreateCompany([FromBody] CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
+            if (companyDto.Projects != null)
+            {
+                await UpdateCompanyProjects(companyDto, company);
+            }
+
             await _context.AddAsync(company);
             await _context.SaveChangesAsync();
         }
@@ -66,7 +78,16 @@ namespace M.CP.Api.Controllers
         [HttpPut("{id}")]
         public async Task EditCompany(int id, [FromBody] CompanyDto companyDto)
         {
-            var company = _mapper.Map<Company>(companyDto);
+            var company = await _context
+                                .Companies
+                                .Include(c => c.Projects)
+                                .Where(c => c.Id == id)
+                                .SingleOrDefaultAsync();
+
+            _mapper.Map(companyDto, company);
+
+            await UpdateCompanyProjects(companyDto, company);
+
             _context.Update(company);
             await _context.SaveChangesAsync();
         }
@@ -84,9 +105,31 @@ namespace M.CP.Api.Controllers
         #endregion
 
         #region Private Methode
-        private bool CompanyExists(int id)
+        private async Task UpdateCompanyProjects(CompanyDto companyDto, Company company)
         {
-            return _context.Companies.Any(e => e.Id == id);
+            var projectIds = GetProjectsIdsFromDto(companyDto);
+
+            var projects = await _context.Projects.Where(c => projectIds.Contains(c.Id)).ToListAsync();
+
+            //var companies = await _context
+            //            .Companies
+            //            .Where(c => companyIds.Contains(c.Id))
+            //            .ToListAsync();
+
+            company.Projects.Clear();
+            company.Projects.AddRange(projects);
+        }
+
+        private List<int> GetProjectsIdsFromDto(CompanyDto companyDto)
+        {
+            var projectsIds = new List<int>();
+
+            foreach (var project in companyDto.Projects)
+            {
+                projectsIds.Add(project.Id);
+            }
+
+            return projectsIds;
         }
 
         #endregion
