@@ -1,5 +1,12 @@
 <div class="container">
-    <table class="table  text-secondary">
+
+    <h1 class="page-title white-text">Companies</h1>
+    <hr>
+
+    <button mat-raised-button class="btn-theme mb-3" [routerLink]="['/companies/add']">Create New</button>
+
+
+    <table class="table text-secondary">
            <thead>
                <tr>
                    <th>Name</th>
@@ -10,17 +17,24 @@
            <tbody>
                <tr *ngFor="let company of companies">
                    <td>{{company.name}}</td>
-                   <td>{{company.rating}}</td>
+                   <td>{{company.rating}}/10 <i class="fas fa-star star"></i></td>
    
                    <td>
-                       <a href="/company/{{company.id}}">
-                           <mat-icon>info</mat-icon>
+                    <a matTooltip="Company Details" [routerLink]="['/companies', company.id]">
+                        <mat-icon class="info">info</mat-icon>
+                    </a>
+                    <a matTooltip="Edit Company" [routerLink]="['/companies/edit', company.id]">
+                        <mat-icon class="edit">edit</mat-icon>
                        </a>
-                       <mat-icon>edit</mat-icon>
-                       <mat-icon>delete</mat-icon>
+                       <a matTooltip="Delete Company" (click)="deleteCompany(company.id)">
+                        <mat-icon class="delete">delete</mat-icon>
+                       </a>
                    </td>
                </tr>
            </tbody>
        </table>
+
+       <mat-spinner class="mx-auto mt-4 mb-3" *ngIf="showSpinner"></mat-spinner>
+
    </div>
    

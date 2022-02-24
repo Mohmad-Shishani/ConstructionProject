@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from '../shared/models/Company';
-import { Project } from '../shared/models/Project';
+import { CompanyDeleteDialogComponent } from './company-delete-dialog/company-delete-dialog.component';
 import { CompanyService } from './company.service';
 
 @Component({
@@ -14,6 +14,8 @@ export class CompanyComponent implements OnInit {
 
   companies!: Company[];
 
+  showSpinner: boolean = true
+
   constructor(
     private companySvc: CompanyService,
     private snackBar: MatSnackBar,
@@ -24,11 +26,40 @@ export class CompanyComponent implements OnInit {
     this.getCompanies();
   }
 
+
+  deleteCompany(id: number): void {
+
+    const dialogRef = this.dialog.open(CompanyDeleteDialogComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+
+        this.companySvc.deleteCompany(id).subscribe(
+          res => {
+            this.snackBar.open("Company has been deleted successfully");
+            this.getCompanies();
+          },
+            // err => {
+            //   this.snackBar.open("INTERNAL SERVER ERROR 500");
+            // }
+        );
+
+      }
+    });
+  }
+
+
+
+
   private getCompanies(): void{
 
     this.companySvc.getCompanies().subscribe(
-      companiesFromServer => {
-        this.companies = companiesFromServer;
+      companies => {
+        this.companies = companies;
+        this.showSpinner = false;
       },
     );
   }

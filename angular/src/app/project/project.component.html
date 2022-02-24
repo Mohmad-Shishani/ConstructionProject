@@ -1,11 +1,11 @@
 <div class="container">
 
-    <h1 class="page-title">Projects</h1>
+    <h1 class="page-title white-text">Projects</h1>
     <hr>
 
     <button mat-raised-button class="btn-theme mb-3" [routerLink]="['/projects/add']">Create New</button>
 
-    <table class="table text-secondary">
+    <table class="table text-secondary white-text">
            <thead>
                <tr>
                    <th>Name</th>
@@ -19,22 +19,24 @@
                <tr *ngFor="let project of projects">
                    <td>{{project.name}}</td>
                    <td>{{project.projectStart | date: 'yyyy'}}</td>
-                   <td>{{project.projectEnd}}</td>
-                   <td>{{project.income}}</td>
-   
+                   <td>{{project.projectEnd | date: 'yyyy'}}</td>
+                   <td>{{project.income}} <strong>JОD</strong></td>
                    <td>
-                    <a matTooltip="Worker Details" [routerLink]="['/projects/', project.id]">
+                    <a matTooltip="Project Details" [routerLink]="['/projects/', project.id]">
                         <mat-icon class="info">info</mat-icon>
                     </a>
-                    <a matTooltip="Edit Worker" [routerLink]="['/projects/edit', project.id]">
+                    <a matTooltip="Edit Project" [routerLink]="['/projects/edit', project.id]">
                         <mat-icon class="edit">edit</mat-icon>
                        </a>
-                       <a matTooltip="Delete Worker" (click)="deleteProject(project.id)">
+                       <a matTooltip="Delete Project" (click)="deleteProject(project.id)">
                         <mat-icon class="delete">delete</mat-icon>
                        </a>
                    </td>
                </tr>
            </tbody>
        </table>
+       
+       <mat-spinner class="mx-auto mt-4 mb-3" *ngIf="showSpinner"></mat-spinner>
+
    </div>
    

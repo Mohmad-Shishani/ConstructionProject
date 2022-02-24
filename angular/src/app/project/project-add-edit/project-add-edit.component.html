@@ -45,7 +45,8 @@
                   <div>
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Income</mat-label>
-                        <input matInput placeholder="$1000,0" formControlName="income"/>
+                        <span matPrefix>JОD &nbsp;</span>
+                        <input matInput type="number" minlength="5" placeholder="$1000,0" formControlName="income"/>
                            <mat-error>
                                  Please provide Income.
                            </mat-error>
@@ -91,4 +92,14 @@
 
             </form>
 </div>
+
+
+
+
+
+
+
+
+
+
 

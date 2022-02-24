@@ -14,6 +14,8 @@ export class ProjectComponent implements OnInit {
 
   projects!: Project[];
 
+  showSpinner: boolean = true
+
   constructor(
     private projectSvc: ProjectService,
     private snackBar: MatSnackBar,
@@ -54,6 +56,7 @@ export class ProjectComponent implements OnInit {
     this.projectSvc.getProjects().subscribe(
       projects => {
         this.projects = projects;
+        this.showSpinner = false;
       },
     );
   }

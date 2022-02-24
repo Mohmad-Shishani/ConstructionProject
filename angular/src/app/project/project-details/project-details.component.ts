@@ -21,7 +21,7 @@ export class ProjectDetailsComponent implements OnInit {
 
     this.projectSvc.getProjectById(projectId).subscribe(
       project => {
-        this.project =project;
+        this.project = project;
       }
     );
   }

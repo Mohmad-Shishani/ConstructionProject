@@ -1,1 +1,9 @@
-<p>company-delete-dialog works!</p>
+<h2 mat-dialog-title>You are about to delete this Company?</h2>
+<hr>
+<mat-dialog-content class="mat-typography">
+    <h3>This Will make A Whole City & it's People without a Company</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+</mat-dialog-actions>

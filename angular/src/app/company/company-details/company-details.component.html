@@ -1,1 +1,44 @@
-<h2>{{company?.name}</h2>
+<div class="container my-4">
+    <h1 class="page-title">Company Details</h1>
+    <hr>
+
+    <div class="row">
+    <div class="col-md-12">
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Name</div>
+            <div class="col-md-10">{{company?.name}}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Company</div>
+            <div class="col-md-10">{{ company?.rating }}/10
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col md 6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Project/s</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let project of company.projects">
+                    <td>{{ project.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+</div>
+
+    <hr>
+    <button mat-raised-button [routerLink]="['/companies']">Back to Projects</button>
+
+</div>

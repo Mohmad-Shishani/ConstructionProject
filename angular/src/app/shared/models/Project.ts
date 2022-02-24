@@ -1,5 +1,5 @@
 import { Company } from "./Company";
-
+import { Worker } from "./Worker";
 
 export interface Project {
     id: number;
@@ -7,6 +7,7 @@ export interface Project {
     projectStart: Date;
     projectEnd: Date ;
     income: number;
-    worker: Worker[];
+    workers: Worker[];
+    companyId: number;
     company: Company;
 }

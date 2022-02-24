@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Worker} from '../shared/models/Worker'
-import { PayWorkerDialogComponent } from './pay-worker-dialog/pay-worker-dialog.component';
 import { WorkerDeleteDialogComponent } from './worker-delete-dialog/worker-delete-dialog.component';
 import { WorkerService } from './worker.service';
 
@@ -19,38 +18,12 @@ showSpinner: boolean = true
 
   constructor(
     private workerSvc: WorkerService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
     this.getWorkers();
-  }
-
-  payWorker(id: number): void {
-
-    const dialogRef = this.dialog.open(PayWorkerDialogComponent, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      
-      if(result) {
-
-        this.workerSvc.payWorker(id).subscribe(
-          res => {
-            this.snackBar.open("Worker has been paid successfully");
-            this.getWorkers();
-          },
-          // err => {
-          //   this.snackBar.open("Server Error!!");
-
-          // }
-        );
-      }
-
-    });
-
   }
 
   deleteWorker(id: number): void {
@@ -83,6 +56,7 @@ showSpinner: boolean = true
     this.workerSvc.getWorkers().subscribe(
       workers => {
         this.workers = workers;
+        this.showSpinner = false;
       },
     );
   }

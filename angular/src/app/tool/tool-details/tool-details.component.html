@@ -1,1 +1,31 @@
-<h2>{{tool?.name}</h2>
+<div class="container my-4">
+    <h1 class="page-title">Tool Details</h1>
+    <hr>
+
+    <div class="row">
+    <div class="col-md-12">
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Name</div>
+            <div class="col-md-10">{{tool?.name}}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Worker</div>
+            <div class="col-md-10">{{ tool?.worker?.name }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+</div>
+
+    <hr>
+    <button mat-raised-button [routerLink]="['/tools']">Back to Projects</button>
+
+</div>

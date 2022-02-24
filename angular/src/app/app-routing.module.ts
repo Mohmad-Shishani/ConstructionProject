@@ -13,28 +13,31 @@ import { HomeComponent } from './home/home.component';
 import { CompanyComponent } from './company/company.component';
 import { ProjectComponent } from './project/project.component';
 import { ToolComponent } from './tool/tool.component';
+import { FAQComponent } from './f-a-q/f-a-q.component'
 
 const routes: Routes = [
-  {path: 'worker', component: WorkerComponent},
+  {path: 'workers', component: WorkerComponent},
   {path: 'workers/add', component: WorkerAddEditComponent},
   {path: 'workers/edit/:id', component: WorkerAddEditComponent},
-  {path: 'worker/:id', component: WorkerDetailsComponent},
+  {path: 'workers/:id', component: WorkerDetailsComponent},
 
-  {path: 'company', component: CompanyComponent},
+  {path: 'companies', component: CompanyComponent},
   {path: 'companies/add', component: CompanyAddEditComponent},
   {path: 'companies/edit/:id', component: CompanyAddEditComponent},
-  {path: 'company/:id', component: CompanyDetailsComponent},
+  {path: 'companies/:id', component: CompanyDetailsComponent},
 
-  {path: 'project', component: ProjectComponent},
+  {path: 'projects', component: ProjectComponent},
   {path: 'projects/add', component: ProjectAddEditComponent},
   {path: 'projects/edit/:id', component: ProjectAddEditComponent},
-  {path: 'project/:id', component: ProjectDetailsComponent},
+  {path: 'projects/:id', component: ProjectDetailsComponent},
 
-  {path: 'tool', component: ToolComponent},
+  {path: 'tools', component: ToolComponent},
   {path: 'tools/add', component: ToolAddEditComponent},
   {path: 'tools/edit/:id', component: ToolAddEditComponent},
-  {path: 'tool/:id', component: ToolDetailsComponent},
+  {path: 'tools/:id', component: ToolDetailsComponent},
   
+  {path: 'f-a-qs', component: FAQComponent},
+
   { path: '**', component: HomeComponent },
 ];
 

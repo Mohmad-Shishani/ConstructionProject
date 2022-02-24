@@ -17,9 +17,9 @@ import { WorkerService } from '../worker.service';
 export class WorkerAddEditComponent implements OnInit {
 
   pageModeEnum = PageMode;
+  pageMode: PageMode = PageMode.Add;
 
   workerId = 0;
-  pageMode: PageMode = PageMode.Add;
 
   toolsList!: Tool[];
   projectsList!: Project[];
@@ -31,7 +31,8 @@ export class WorkerAddEditComponent implements OnInit {
     dateOfBirth: ['', Validators.required],
     gender: ['', Validators.required],
     shift: ['', Validators.required],
-    payment: [false, Validators.required],
+    payment: [false],
+    paymentDate: [''],
     tools: [''],
     projects: ['']
   });
@@ -70,9 +71,9 @@ export class WorkerAddEditComponent implements OnInit {
             this.router.navigate(["/workers"]);
           },
           
-          // err => {
-          //     this.snackBar.open("Couldn't Add a New Worker");
-          // }
+          err => {
+              this.snackBar.open("Couldn't Add a New Worker");
+          }
         );
       }
       else{
@@ -83,9 +84,9 @@ export class WorkerAddEditComponent implements OnInit {
             this.snackBar.open("Edited Worker Successfully");
             this.router.navigate(["/workers"]);
           },
-          // err =>{
-          //   this.snackBar.open("Couldn't Edit The Worker");
-          // }
+          err =>{
+            this.snackBar.open("Couldn't Edit The Worker");
+          }
         );
       }
     }
@@ -93,11 +94,11 @@ export class WorkerAddEditComponent implements OnInit {
 
 
   compareTools(tool1: Tool, tool2: Tool): boolean {
-    return tool1 && tool2? tool1.id === tool2.id: tool1 === tool2;
+    return tool1 && tool2 ? tool1.id === tool2.id: tool1 === tool2;
   }
 
   compareProjects(pro1: Project, pro2: Project): boolean {
-    return pro1 && pro2? pro1.id === pro2.id: pro1 === pro2;
+    return pro1 && pro2 ? pro1.id === pro2.id: pro1 === pro2;
   }
 
 
@@ -112,6 +113,7 @@ export class WorkerAddEditComponent implements OnInit {
 
     
  private enterEditPageMode() {
+
     this.workerSvc.getWorkerById(this.workerId).subscribe(
 
       workerFromServer => {
@@ -122,7 +124,8 @@ export class WorkerAddEditComponent implements OnInit {
           dateOfBirth: workerFromServer.dateOfBirth,
           gender: workerFromServer.gender,
           shift: workerFromServer.shift,
-          Payment: workerFromServer.payment,
+          payment: workerFromServer.payment,
+          paymentDate: workerFromServer.paymentDate,
           tools: workerFromServer.tools,
           projects: workerFromServer.projects,
         });
@@ -132,7 +135,7 @@ export class WorkerAddEditComponent implements OnInit {
 
 
 
-  private getLists() {
+  private getLists()  {
     this.getTools();
     this.getProjects();
   }

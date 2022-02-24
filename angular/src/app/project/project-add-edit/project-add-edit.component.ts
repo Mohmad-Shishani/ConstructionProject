@@ -18,7 +18,7 @@ export class ProjectAddEditComponent implements OnInit {
 
   pageModeEnum = PageMode;
 
-  projectId = 0;
+  projectId = 0;  
   pageMode: PageMode = PageMode.Add;
 
   companiesList!: Company[];

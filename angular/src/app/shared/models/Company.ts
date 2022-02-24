@@ -4,5 +4,5 @@ export interface Company {
     id: number;
     name: string;
     rating: number;
-    project: Project[];
+    projects: Project[];
 }

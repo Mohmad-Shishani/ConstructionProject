@@ -11,7 +11,7 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-2 font-weight-bold">Date of Birth</div>
-            <div class="col-md-10">{{worker?.dateOfBirth | date: 'yyyy,mm,dd'}}</div>
+            <div class="col-md-10">{{worker?.dateOfBirth | date: 'short'}}</div>
         </div>
         <div class="row mb-3">
             <div class="col-md-2 font-weight-bold">Gender</div>
@@ -23,9 +23,22 @@
             </div>
         </div>
         
-        <div class="row mb-3">
+        <!-- <div class="row mb-3">
             <div class="col-md-2 font-weight-bold">Payment</div>
             <div class="col-md-10">{{ worker?.payment }}</div>
+        </div> -->
+        
+
+        <div class="row mb-3">
+            <div class="col-md-2 font-weight-bold">Payment</div>
+            <div class="col-md-10">
+                <span *ngIf="worker?.payment">
+                    <p class="text-success">Payed</p>
+                </span>
+                <span *ngIf="worker?.payment == false">
+                <p class="text-danger">Not Payed yet</p>
+                </span>
+            </div>
         </div>
         
         <div class="row mb-3">

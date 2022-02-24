@@ -22,7 +22,7 @@
                 <td>{{worker.gender}}</td>
                 <td>{{worker.shift}}</td>
                 <td>
-                    <span *ngIf="worker.payment" matTooltip="Paid On: {{worker.paymentDate | date: 'short'}}">
+                    <span *ngIf="worker.payment" matTooltip="Paid On: {{worker.paymentDate | date: 'short' }}">
                         <mat-icon class="text-success">check_circle</mat-icon>
                     </span>
                     <span *ngIf="worker.payment == false">
@@ -37,11 +37,14 @@
                     <a matTooltip="Edit Worker" [routerLink]="['/workers/edit', worker.id]">
                         <mat-icon class="edit">edit</mat-icon>
                        </a>
-                       <a matTooltip="Delete Worker" (click)="deleteWorker(worker.id)">
+                       <a matTooltip="Delete Worker" class="pointer" (click)="deleteWorker(worker.id)">
                         <mat-icon class="delete">delete</mat-icon>
                        </a>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <mat-spinner class="mx-auto mt-4 mb-3" *ngIf="showSpinner"></mat-spinner>
+
 </div>

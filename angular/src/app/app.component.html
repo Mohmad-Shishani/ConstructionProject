@@ -1,37 +1,42 @@
 <header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark mb-4 bg-dark ">
 <div class="container">
 
   <a class="navbar-brand" href="/">
-    <img src="../assets/img/Logo.png" width="60" height="30" class="d-inline-block align-top" alt="CPM">
-    <!-- <span class="brand-name">CPM</span> -->
+    <img src="../assets/img/towes.png" height="75" class="" alt="CPM">
+    <span class="project-name">CPM</span>
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/">Home</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/worker">Workers</a>
+        <a class="nav-link" href="/workers">Workers</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/project">Projects</a>
+        <a class="nav-link" href="/projects">Projects</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/company">Companies</a>
+        <a class="nav-link" href="/companies">Companies</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/tool">Tools</a>
+        <a class="nav-link" href="/tools">Tools</a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link disabled" aria-disabled="true" href="/companies">About Us</a>
       </li>
 
     </ul>
@@ -42,7 +47,7 @@
 
 
 
-<div class="container-fluid">
+<div>
   <router-outlet>
 
   </router-outlet>
@@ -50,6 +55,141 @@
 
 
 
-<footer>
-  
+<footer class="page-footer font-small theme">
+
+  <div class="container text-center text-md-left">
+
+<div class="row">
+
+  <div class="col-md-6 mx-auto media-btn white-text">
+
+    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Our social Medias</h5>
+
+    <button class="media-btn twitter" mat-fab><i class="fab fa-twitter "></i></button>
+    <button class="media-btn linkedin" mat-fab><i class="fab fa-linkedin-in "></i></button>
+    <button class="media-btn facebook" mat-fab><i class="fab fa-facebook-f "></i></button>
+    <button class="media-btn discord" mat-fab><i class="fab fa-discord"></i></button>
+    <button class="media-btn google" mat-fab><i class="fab fa-google-plus-g "></i></button>
+    <button class="media-btn youtube" mat-fab><i class="fab fa-youtube"></i></button>
+
+  </div>
+
+  <div class="col md 6 white-text">
+              <!-- Content -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4 white-text">Join us Now!!</h5>
+              <p class="white-text">Suspendisse pretium pretium felis vel pretium, Phasellus cursus urna eu augue feugiat.
+                vel sagittis sem lobortis. In tempor maximus vehicula.
+              </p>
+  </div>
+
+</div>
+
+    <hr class=" w-100 ">
+
+    <div class="row">
+
+      <div class="col-md-3 mx-auto white-text">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Help</h5>
+
+        <ul class="list-unstyled ">
+          <li>
+            <a class="pb-2" href="/f-a-qs">FAQ</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Support</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Troubleshooting</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Contact Us</a>
+          </li>
+        </ul>
+
+      </div>
+
+
+      <hr class="clearfix w-100 d-md-none">
+
+
+      <div class="col-md-3 mx-auto white-text">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Other Websites</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a class="pb-2" href="#">Mibax</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">The Cake Shop</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">CPM</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">DVLD</a>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+      <hr class="clearfix w-100 d-md-none">
+
+
+
+      <div class="col-md-3 mx-auto white-text">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">USEFUL LINKS</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a class="pb-2" href="#">Pricing</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Partners</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Projects</a>
+          </li>
+          <li>
+            <a class="pb-2" href="#">Parents</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <hr class="clearfix w-100 d-md-none">
+
+
+
+      <div class="col-md-3 mx-auto white-text">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contact</h5>
+
+        <p class="white-text"><i class="fas fa-home me-3 text-light "></i> Az Zarqa, AZ 13115, JO</p>
+        <p class="white-text"><i class="fas fa-envelope me-3 text-light"></i> CPM@yahoo.com  </p>
+        <p class="white-text"><i class="fas fa-phone me-3 text-light"></i> + 962 342 554 88</p>
+        <p class="white-text"><i class="fas fa-print me-3 text-light"></i> + 962 761 982 76</p>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="footer-copyright text-center py-3 bg-dark text-light">
+    © 2022 Copyright:
+    <a href="https://store.mibax.com/">Mibax.com</a>
+  </div>
+<!-- 
+  <a id="scrollToTop" href="#" class="back-to-top d-flex align-items-center justify-content-center active">
+    <i class="fas fa-arrow-up"></i>
+  </a> -->
+
+<button mat-fab class="scrollUp" *ngIf="isShow" (click)="gotoTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
 </footer>

@@ -10,6 +10,8 @@ export interface Worker{
     gender: Gender;
     shift: Shift;
     payment: boolean;
+    paymentDate: Date;
     tools: Tool[];
     projects: Project[];
+    worker: Worker[];
 }

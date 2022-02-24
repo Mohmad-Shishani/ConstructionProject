@@ -1,1 +1,54 @@
-<p>company-add-edit works!</p>
+<div class="container my-4">
+    <form [formGroup]="companyForm" (ngSubmit)="submitForm()">
+
+      <h1 *ngIf="pageMode == pageModeEnum.Add">Add a Company</h1>
+      <h1 *ngIf="pageMode == pageModeEnum.Edit">Edit the Company</h1>
+          <hr>
+          
+          <div class="row">
+                <div class="col md 6">
+
+                      <div>
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Name</mat-label>
+                                <input matInput number placeholder="Name" formControlName="name"/>
+                                   <mat-error>
+                                         Please provide name.
+                                   </mat-error>
+                            </mat-form-field>
+                      </div>
+                
+                      <div>
+                            <mat-label>Rating</mat-label>
+                            <ngb-rating class="star-rating mb-2" formControlName="rating"></ngb-rating>
+                            <hr>
+                  </div>
+        
+                </div>
+
+                <div class="col md 6">
+                  <div>
+                        <mat-form-field appearance="fill" class="w-100">
+                              <mat-label>Projects</mat-label>
+                              <mat-select formControlName="projects" multiple [compareWith]="compareProjects">
+                                    <mat-option *ngFor="let project of projectsList" [value]="project">
+                                          {{project.name}}
+                                    </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                  </div>
+                      
+                </div>
+          </div>
+
+            <div>
+                   <button class="mr-2 btn-theme" type="submit" mat-raised-button>
+                    <span *ngIf="pageMode == pageModeEnum.Add">Add</span>
+                    <span *ngIf="pageMode == pageModeEnum.Edit">Save</span>
+                </button>
+                <button mat-raised-button [routerLink]="['/companies']">Cancel</button>
+            </div>
+
+            </form>
+</div>
+

@@ -25,6 +25,8 @@ import { ToolAddEditComponent } from './tool/tool-add-edit/tool-add-edit.compone
 import { ToolDetailsComponent } from './tool/tool-details/tool-details.component';
 import { ToolDeleteDialogComponent } from './tool/tool-delete-dialog/tool-delete-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { FAQComponent } from './f-a-q/f-a-q.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToolComponent,
     ProjectComponent,
     HomeComponent,
+    FAQComponent,
     WorkerAddEditComponent,
     CompanyAddEditComponent,
     ToolAddEditComponent,
@@ -47,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToolDeleteDialogComponent,
     CompanyDeleteDialogComponent,
     ProjectDeleteDialogComponent,
+    FAQComponent,
 
   ],
   imports: [
@@ -56,10 +60,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgbModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
     
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
