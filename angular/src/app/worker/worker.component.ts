@@ -43,7 +43,7 @@ export class WorkerComponent implements OnInit {
             this.getWorkers();
           },
             err => {
-              this.snackBar.open("INTERNAL SERVER ERROR 500");
+              this.snackBar.open("Before deleting the worker he should return the tools he borrowed");
             }
         );
 

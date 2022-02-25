@@ -68,6 +68,7 @@ namespace M.CP.Api.Controllers
         public async Task CreateWorker([FromBody] WorkerDto workerDto)
         {
             var worker = _mapper.Map<Worker>(workerDto);
+
             if (workerDto.Projects != null)
             {
                 await UpdateWorkerProjects(workerDto, worker);
