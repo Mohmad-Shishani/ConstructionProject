@@ -12,9 +12,9 @@ import { WorkerService } from './worker.service';
 })
 export class WorkerComponent implements OnInit {
 
-workers!: Worker[];
+  workers!: Worker[];
 
-showSpinner: boolean = true
+  showSpinner: boolean = true
 
   constructor(
     private workerSvc: WorkerService,
@@ -41,9 +41,9 @@ showSpinner: boolean = true
             this.snackBar.open("Worker has been deleted successfully");
             this.getWorkers();
           },
-            // err => {
-            //   this.snackBar.open("INTERNAL SERVER ERROR 500");
-            // }
+            err => {
+              this.snackBar.open("INTERNAL SERVER ERROR 500");
+            }
         );
 
       }

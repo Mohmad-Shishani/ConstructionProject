@@ -26,7 +26,7 @@
                     <a matTooltip="Edit Company" [routerLink]="['/companies/edit', company.id]">
                         <mat-icon class="edit">edit</mat-icon>
                        </a>
-                       <a matTooltip="Delete Company" (click)="deleteCompany(company.id)">
+                       <a matTooltip="Delete Company" class="pointer" (click)="deleteCompany(company.id)">
                         <mat-icon class="delete">delete</mat-icon>
                        </a>
                    </td>

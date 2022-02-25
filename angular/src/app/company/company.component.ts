@@ -42,9 +42,9 @@ export class CompanyComponent implements OnInit {
             this.snackBar.open("Company has been deleted successfully");
             this.getCompanies();
           },
-            // err => {
-            //   this.snackBar.open("INTERNAL SERVER ERROR 500");
-            // }
+            err => {
+              this.snackBar.open("You Can't Delete This Company it still has unfinished projects. YOU CAN'T AVOID TAXES");
+            }
         );
 
       }
