@@ -78,14 +78,14 @@ namespace M.CP.Api.Controllers
                 await UpdateWorkerTools(workerDto, worker);
             }
 
-            if (worker.Payment == false)
-            {
-                worker.PaymentDate = null;
-            }
-            else
-            {
-                worker.PaymentDate = DateTime.Now;
-            }
+            //if (worker.Payment == false)
+            //{
+            //    worker.PaymentDate = null;
+            //}
+            //else
+            //{
+            //    worker.PaymentDate = DateTime.Now;
+            //}
 
 
             await _context.AddAsync(worker);
@@ -114,10 +114,10 @@ namespace M.CP.Api.Controllers
             {
                 worker.PaymentDate = null;
             }
-            else
-            {
-                worker.PaymentDate = DateTime.Now;
-            }
+            //else
+            //{
+            //    worker.PaymentDate = DateTime.Now;
+            //}
             _context.Update(worker);
             await _context.SaveChangesAsync();
 
