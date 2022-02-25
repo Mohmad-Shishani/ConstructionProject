@@ -25,7 +25,7 @@ export class CompanyAddEditComponent implements OnInit {
   companyForm = this.fb.group({
     id: [0],
     name: ['', Validators.required],
-    rating: [''],
+    rating: ['', Validators.required],
     projects: ['']
   });
 

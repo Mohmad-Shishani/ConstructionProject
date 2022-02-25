@@ -65,7 +65,7 @@ import { PayWorkerDialogComponent } from './worker/pay-worker-dialog/pay-worker-
     
   ],
   providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration:3500}}
   ],
   bootstrap: [AppComponent]
 })
