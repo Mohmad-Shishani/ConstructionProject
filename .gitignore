@@ -32,5 +32,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-/angular/src/assets/img
-/angular/src/assets/video
+
