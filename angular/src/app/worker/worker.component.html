@@ -31,15 +31,18 @@
                 </td>
 
                 <td>
-                    <a matTooltip="Worker Details" [routerLink]="['/workers/', worker.id]">
-                        <mat-icon class="info">info</mat-icon>
-                    </a>
-                    <a matTooltip="Edit Worker" [routerLink]="['/workers/edit', worker.id]">
-                        <mat-icon class="edit">edit</mat-icon>
-                       </a>
-                       <a matTooltip="Delete Worker" class="pointer" (click)="deleteWorker(worker.id)">
-                        <mat-icon class="delete">delete</mat-icon>
-                       </a>
+                        <a matTooltip="Worker Details" [routerLink]="['/workers/', worker.id]">
+                            <mat-icon class="info">info</mat-icon>
+                        </a>
+                        <a matTooltip="Edit Worker" [routerLink]="['/workers/edit', worker.id]">
+                            <mat-icon class="edit">edit</mat-icon>
+                        </a>
+                        <a matTooltip="Delete Worker" class="pointer" (click)="deleteWorker(worker.id)">
+                            <mat-icon class="delete">delete</mat-icon>
+                        </a>
+                        <a *ngIf="worker.payment == false" class="pointer" matTooltip="Pay For Worker" (click)="payWorker(worker.id)">
+                            <mat-icon>credit_card</mat-icon>
+                        </a>
                 </td>
             </tr>
         </tbody>

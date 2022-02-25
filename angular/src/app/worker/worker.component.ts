@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Worker} from '../shared/models/Worker'
+import { PayWorkerDialogComponent } from './pay-worker-dialog/pay-worker-dialog.component';
 import { WorkerDeleteDialogComponent } from './worker-delete-dialog/worker-delete-dialog.component';
 import { WorkerService } from './worker.service';
 
@@ -48,6 +49,33 @@ export class WorkerComponent implements OnInit {
 
       }
     });
+  }
+
+
+  payWorker(id: number): void {
+
+    const dialogRef = this.dialog.open(PayWorkerDialogComponent, {
+      width: '460px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+      if(result) {
+
+        this.workerSvc.payWorker(id).subscribe(
+          res => {
+            this.snackBar.open("Worker has been paid successfully");
+            this.getWorkers();
+          },
+          err => {
+            this.snackBar.open("Server Error!!");
+
+          }
+        );
+      }
+
+    });
+
   }
 
 

@@ -27,6 +27,7 @@ import { ToolDeleteDialogComponent } from './tool/tool-delete-dialog/tool-delete
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { FAQComponent } from './f-a-q/f-a-q.component';
+import { PayWorkerDialogComponent } from './worker/pay-worker-dialog/pay-worker-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,7 @@ import { FAQComponent } from './f-a-q/f-a-q.component';
     ToolDeleteDialogComponent,
     CompanyDeleteDialogComponent,
     ProjectDeleteDialogComponent,
-    FAQComponent,
-
+    PayWorkerDialogComponent,
   ],
   imports: [
     BrowserModule,
