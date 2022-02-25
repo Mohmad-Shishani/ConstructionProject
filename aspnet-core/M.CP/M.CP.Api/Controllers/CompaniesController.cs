@@ -64,6 +64,7 @@ namespace M.CP.Api.Controllers
         public async Task CreateCompany([FromBody] CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
+
             if (companyDto.Projects != null)
             {
                 await UpdateCompanyProjects(companyDto, company);
@@ -98,7 +99,7 @@ namespace M.CP.Api.Controllers
         public async Task DeleteCompany(int id)
         {
             var company = await _context.Companies.FindAsync(id);
-            _context.Companies.Remove(company);
+            _context.Remove(company);
             await _context.SaveChangesAsync();
         }
 
@@ -109,7 +110,7 @@ namespace M.CP.Api.Controllers
         {
             var projectIds = GetProjectsIdsFromDto(companyDto);
 
-            var projects = await _context.Projects.Where(c => projectIds.Contains(c.Id)).ToListAsync();
+            var projects = await _context.Projects.Where(p => projectIds.Contains(p.Id)).ToListAsync();
 
             //var companies = await _context
             //            .Companies

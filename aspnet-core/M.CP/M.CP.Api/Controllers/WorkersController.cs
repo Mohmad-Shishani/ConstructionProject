@@ -72,6 +72,22 @@ namespace M.CP.Api.Controllers
             {
                 await UpdateWorkerProjects(workerDto, worker);
             }
+
+            if (workerDto.Tools != null)
+            {
+                await UpdateWorkerTools(workerDto, worker);
+            }
+
+            if (worker.Payment == false)
+            {
+                worker.PaymentDate = null;
+            }
+            else
+            {
+                worker.PaymentDate = DateTime.Now;
+            }
+
+
             await _context.AddAsync(worker);
             await _context.SaveChangesAsync();
         }
@@ -92,9 +108,15 @@ namespace M.CP.Api.Controllers
 
             await UpdateWorkerProjects(workerDto, worker);
 
+            await UpdateWorkerTools(workerDto, worker);
+
             if (worker.Payment == false)
             {
                 worker.PaymentDate = null;
+            }
+            else
+            {
+                worker.PaymentDate = DateTime.Now;
             }
             _context.Update(worker);
             await _context.SaveChangesAsync();
@@ -130,9 +152,6 @@ namespace M.CP.Api.Controllers
 
         #region Private Methods
 
-
-
-
         private async Task UpdateWorkerProjects(WorkerDto workerDto, Worker worker)
         {
             var projectIds = GetProjectsIdsFromDto(workerDto);
@@ -160,6 +179,31 @@ namespace M.CP.Api.Controllers
         }
 
 
+        private async Task UpdateWorkerTools(WorkerDto workerDto, Worker worker)
+        {
+            var toolIds = GetToolsIdsFromDto(workerDto);
+
+
+            var tools = await _context
+                                    .Tools
+                                    .Where(t => toolIds.Contains(t.Id))
+                                    .ToListAsync();
+
+            worker.Tools.Clear();
+            worker.Tools.AddRange(tools);
+        }
+
+        private List<int> GetToolsIdsFromDto(WorkerDto workerDto)
+        {
+            var toolsIds = new List<int>();
+
+            foreach (var tool in workerDto.Tools)
+            {
+                toolsIds.Add(tool.Id);
+            }
+
+            return toolsIds;
+        }
 
 
 
